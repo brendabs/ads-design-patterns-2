@@ -1,6 +1,5 @@
-import sales.Sale;
-import sales.SalesService;
-import sales.BlackFridaySale;
+import services.SalesService;
+import product.SimpleProduct;
 import product.Product;
 
 import java.util.List;
@@ -8,14 +7,14 @@ import java.util.ArrayList;
 
 public class App {
   public static void main(String[] args) throws Exception {
-    Product teste1 = new Product("Produto 1", 10);
-    Product teste2 = new Product("Produto 1", 10);
-    Product teste3 = new Product("Produto 1", 10);
+    SimpleProduct teclado = new SimpleProduct("Teclado Razer Blackwidow", 549.90);
+    SimpleProduct headset = new SimpleProduct("Headset HyperX Cloud Core", 446.40);
+    SimpleProduct mouse = new SimpleProduct("Mouse Razer Deathadder Essential", 236.90);
 
     List<Product> products = new ArrayList<>();
-    products.add(teste1);
-    products.add(teste2);
-    products.add(teste3);
+    products.add(teclado);
+    products.add(headset);
+    products.add(mouse);
 
     SalesService teste = new SalesService();
     teste.sellProduct(products);
