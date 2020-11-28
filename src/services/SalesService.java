@@ -2,6 +2,7 @@ package services;
 import product.Product;
 import product.CompositeProduct;
 import product.SimpleProduct;
+import product.Stock;
 
 import helpers.FormatPrice;
 
@@ -9,7 +10,21 @@ import sales.BlackFridaySale;
 import sales.NormalSale;
 import java.util.List;
 
+import observer.Email;
+
 public class SalesService implements FormatPrice {
+  private Stock stock = new Stock();
+
+  private void checkStock () {
+    if (stock.quantity < 1) {
+      System.out.println("Ops, não temos esse produto em estoque no momento. Você será avisado assim que tivermos ele em estoque novamente :)!" + "\n");
+
+      this.stock.addObserver(new Email());
+
+      this.stock.setQuantity();
+    }
+  }
+
   public String formatPrice (double price) {
     return String.format("%.2f", price);
   }
@@ -17,6 +32,9 @@ public class SalesService implements FormatPrice {
   public void sellProduct (List<Product> productList) {
     Boolean isCompositeProduct = productList.size() > 1;
     Boolean isBlackFriday = true;
+
+    this.checkStock();
+
     Product finalProduct = isCompositeProduct
       ? this.mountCompositeProduct(productList)
       : this.mountSimpleProduct(productList);

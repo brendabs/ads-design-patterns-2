@@ -16,7 +16,7 @@ public class App {
     products.add(headset);
     products.add(mouse);
 
-    SalesService teste = new SalesService();
-    teste.sellProduct(products);
+    SalesService seller = new SalesService();
+    seller.sellProduct(products);
   }
 }
